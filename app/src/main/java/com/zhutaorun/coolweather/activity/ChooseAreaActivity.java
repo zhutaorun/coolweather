@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.zhutaorun.coolweather.R;
 import com.zhutaorun.coolweather.model.City;
-import com.zhutaorun.coolweather.model.CoolWeatherDB;
+import com.zhutaorun.coolweather.db.CoolWeatherDB;
 import com.zhutaorun.coolweather.model.County;
 import com.zhutaorun.coolweather.model.Province;
 import com.zhutaorun.coolweather.util.HttpCallbackListener;

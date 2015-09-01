@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.zhutaorun.coolweather.model.City;
-import com.zhutaorun.coolweather.model.CoolWeatherDB;
+import com.zhutaorun.coolweather.db.CoolWeatherDB;
 import com.zhutaorun.coolweather.model.County;
 import com.zhutaorun.coolweather.model.Province;
 

@@ -1,11 +1,13 @@
-package com.zhutaorun.coolweather.model;
+package com.zhutaorun.coolweather.db;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.zhutaorun.coolweather.db.CoolWeatherOpenHelper;
+import com.zhutaorun.coolweather.model.City;
+import com.zhutaorun.coolweather.model.County;
+import com.zhutaorun.coolweather.model.Province;
 
 import java.util.ArrayList;
 import java.util.List;
