@@ -112,6 +112,19 @@ public class CoolWeatherDB {
     }
 
     /*
+    *将County实例存储到数据库。
+    * */
+    public void saveCounty(County county){
+        if(county != null){
+            ContentValues values = new ContentValues();
+            values.put("county_name",county.getCountyName());
+            values.put("county_code",county.getCountyCode());
+            values.put("city_id",county.getCityId());
+            db.insert("County",null,values);
+        }
+    }
+
+    /*
     * 数据库读取某城市下所有的县信息
     * */
     public List<County> loadCounties(int cityId){
