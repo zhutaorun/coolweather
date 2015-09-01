@@ -25,7 +25,7 @@ public class Utility {
     /*
     *解析和处理服务器返回的省级数据
     * */
-    public synchronized  static boolean handleProvincesResponse(CoolWeatherDB coolWeatherDB,String response){
+    public synchronized static boolean handleProvincesResponse(CoolWeatherDB coolWeatherDB,String response){
         if(!TextUtils.isEmpty(response)){
             String[] allProvinces = response.split(",");
             if(allProvinces != null && allProvinces.length>0){

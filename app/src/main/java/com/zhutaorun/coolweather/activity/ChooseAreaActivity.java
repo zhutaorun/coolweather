@@ -76,8 +76,8 @@ public class ChooseAreaActivity extends Activity {
     private boolean isFromWeatherActivity;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         isFromWeatherActivity = getIntent().getBooleanExtra("from_weather_activity",false);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         //已经选择了城市且不是从WeatherActivity跳转过来，才会直接跳转到WeatherActivity
@@ -90,9 +90,6 @@ public class ChooseAreaActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.choose_area);
         listView = (ListView) findViewById(R.id.list_view);
-        if(listView ==null){
-            Log.e("TAG","view is null");
-        }
         titleText = (TextView) findViewById(R.id.title_text);
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,dataList);
         listView.setAdapter(adapter);
@@ -100,7 +97,7 @@ public class ChooseAreaActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(currentLevel ==LEVEL_PROVINCE){
+                if(currentLevel == LEVEL_PROVINCE){
                     selectedProvince = provinceList.get(position);
                     queryCities();
                 }else if(currentLevel == LEVEL_CITY){
@@ -123,6 +120,7 @@ public class ChooseAreaActivity extends Activity {
     * */
      private void queryProvinces(){
          provinceList = coolWeatherDB.loadProvinces();
+         Log.e("TAG",provinceList.toString());
          if(provinceList.size() > 0){
              dataList.clear();
              for(Province province :provinceList){
@@ -186,6 +184,7 @@ public class ChooseAreaActivity extends Activity {
             address = "http://www.weather.com.cn/data/list3/city.xml";
         }
         showProgressDialog();
+        Log.e("TAG", address);
         HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
             @Override
             public void onFinish(String response) {
