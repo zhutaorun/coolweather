@@ -112,6 +112,7 @@ public class ChooseAreaActivity extends Activity {
                 }
             }
         });
+        Log.i("TAG","1");
         queryProvinces();   //加载省级数据
     }
 
@@ -120,8 +121,9 @@ public class ChooseAreaActivity extends Activity {
     * */
      private void queryProvinces(){
          provinceList = coolWeatherDB.loadProvinces();
-         Log.e("TAG",provinceList.toString());
+         Log.i("TAG",provinceList.size()+"");
          if(provinceList.size() > 0){
+             Log.i("TAG","3");
              dataList.clear();
              for(Province province :provinceList){
                  dataList.add(province.getProvinceName());
@@ -131,7 +133,9 @@ public class ChooseAreaActivity extends Activity {
              titleText.setText("中国");
              currentLevel = LEVEL_PROVINCE;
          }else {
-             queryFromServer(null,"province");
+             Log.i("TAG", "2");
+             queryFromServer(null, "province");
+
          }
      }
 
@@ -184,7 +188,6 @@ public class ChooseAreaActivity extends Activity {
             address = "http://www.weather.com.cn/data/list3/city.xml";
         }
         showProgressDialog();
-        Log.e("TAG", address);
         HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
             @Override
             public void onFinish(String response) {

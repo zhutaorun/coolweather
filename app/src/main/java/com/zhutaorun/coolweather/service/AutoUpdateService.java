@@ -45,7 +45,9 @@ public class AutoUpdateService extends Service {
     private void updateWeather(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherCode = prefs.getString("weather_code", "");
-        String address = "http://www.weather.com.cn.data/cityinfo/" + weatherCode +".xml";
+        //String address = "http://www.weather.com.cn.data/cityinfo/" + weatherCode +".xml";
+        String httpUrl = "http://apis.baidu.com/apistore/weatherservice/cityid?cityid=";
+        String address = httpUrl + weatherCode;
         HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
             @Override
             public void onFinish(String response) {

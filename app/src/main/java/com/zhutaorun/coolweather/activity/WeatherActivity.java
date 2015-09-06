@@ -121,7 +121,9 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
     * 查询天气代号所对应的天气。
     * */
     private void queryWeatherInfo(String weatherCode){
-        String address = "http://www.weather.com.cn/data/cityinfo/" + weatherCode + ".xml";
+        //String address = "http://www.weather.com.cn/data/cityinfo/" + weatherCode + ".xml";
+        String httpUrl = "http://apis.baidu.com/apistore/weatherservice/cityid?cityid=";
+        String address = httpUrl+weatherCode;
         queryFromServer(address,"weatherCode");
     }
 

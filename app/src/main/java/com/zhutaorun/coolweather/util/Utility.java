@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.zhutaorun.coolweather.model.City;
 import com.zhutaorun.coolweather.db.CoolWeatherDB;
@@ -28,6 +29,7 @@ public class Utility {
     public synchronized static boolean handleProvincesResponse(CoolWeatherDB coolWeatherDB,String response){
         if(!TextUtils.isEmpty(response)){
             String[] allProvinces = response.split(",");
+            Log.e("TAG","allProvinces"+allProvinces+"");
             if(allProvinces != null && allProvinces.length>0){
                 for(String p : allProvinces){
                     String[] array = p.split("\\|");
@@ -111,7 +113,7 @@ public class Utility {
     * 将服务器返回的所有天气信息存储到SharedPreferences文件中。
     * */
     public static void saveWeatherInfo(Context context, String cityName, String weatherCode, String temp1, String temp2, String weatherDesp, String publishTime){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年M月d日", Locale.CANADA);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年M月d日", Locale.CHINA);
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         editor.putBoolean("city_selected",true);
         editor.putString("city_name", cityName);
