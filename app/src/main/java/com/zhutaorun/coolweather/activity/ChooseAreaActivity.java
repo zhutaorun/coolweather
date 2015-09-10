@@ -97,22 +97,21 @@ public class ChooseAreaActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(currentLevel == LEVEL_PROVINCE){
+                if (currentLevel == LEVEL_PROVINCE) {
                     selectedProvince = provinceList.get(position);
                     queryCities();
-                }else if(currentLevel == LEVEL_CITY){
-                    selectedCity =cityList.get(position);
+                } else if (currentLevel == LEVEL_CITY) {
+                    selectedCity = cityList.get(position);
                     queryCounties();
-                }else if(currentLevel == LEVEL_COUNTY){
+                } else if (currentLevel == LEVEL_COUNTY) {
                     String countyCode = countyList.get(position).getCountyCode();
-                    Intent intent = new Intent(ChooseAreaActivity.this,WeatherActivity.class);
-                    intent.putExtra("county_code",countyCode);
+                    Intent intent = new Intent(ChooseAreaActivity.this, WeatherActivity.class);
+                    intent.putExtra("county_code", countyCode);
                     startActivity(intent);
                     finish();
                 }
             }
         });
-        Log.i("TAG","1");
         queryProvinces();   //加载省级数据
     }
 
@@ -121,9 +120,8 @@ public class ChooseAreaActivity extends Activity {
     * */
      private void queryProvinces(){
          provinceList = coolWeatherDB.loadProvinces();
-         Log.i("TAG",provinceList.size()+"");
+         Log.e("TAG","provinceList="+provinceList.toString());
          if(provinceList.size() > 0){
-             Log.i("TAG","3");
              dataList.clear();
              for(Province province :provinceList){
                  dataList.add(province.getProvinceName());
@@ -133,7 +131,6 @@ public class ChooseAreaActivity extends Activity {
              titleText.setText("中国");
              currentLevel = LEVEL_PROVINCE;
          }else {
-             Log.i("TAG", "2");
              queryFromServer(null, "province");
 
          }
@@ -188,28 +185,30 @@ public class ChooseAreaActivity extends Activity {
             address = "http://www.weather.com.cn/data/list3/city.xml";
         }
         showProgressDialog();
+        Log.e("TAG", "address="+address);
         HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
             @Override
             public void onFinish(String response) {
                 boolean result = false;
-                if("province".equals(type)){
-                    result = Utility.handleProvincesResponse(coolWeatherDB,response);
-                }else if("city".equals(type)){
-                    result = Utility.handleCitiesResponse(coolWeatherDB,response,selectedProvince.getId());
-                }else if("county".equals(type)){
-                    result = Utility.handleContiesResponse(coolWeatherDB,response,selectedCity.getId());
+                if ("province".equals(type)) {
+                    result = Utility.handleProvincesResponse(coolWeatherDB, response);
+                } else if ("city".equals(type)) {
+                    result = Utility.handleCitiesResponse(coolWeatherDB, response, selectedProvince.getId());
+                } else if ("county".equals(type)) {
+                    result = Utility.handleContiesResponse(coolWeatherDB, response, selectedCity.getId());
                 }
-                if(result){
+                if (result) {
+                    Log.e("TAG","result="+result);
                     //通过runOnUiThread()方法回到主线程处理逻辑
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             closeProgressDialog();
-                            if("province".equals(type)){
+                            if ("province".equals(type)) {
                                 queryProvinces();
-                            }else if("city".equals(type)){
+                            } else if ("city".equals(type)) {
                                 queryCities();
-                            }else if("county".equals(type)){
+                            } else if ("county".equals(type)) {
                                 queryCounties();
                             }
                         }
@@ -224,7 +223,7 @@ public class ChooseAreaActivity extends Activity {
                     @Override
                     public void run() {
                         closeProgressDialog();
-                        Toast.makeText(ChooseAreaActivity.this,"加载失败",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ChooseAreaActivity.this, "加载失败", Toast.LENGTH_LONG).show();
                     }
                 });
             }
