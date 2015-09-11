@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -120,7 +119,6 @@ public class ChooseAreaActivity extends Activity {
     * */
      private void queryProvinces(){
          provinceList = coolWeatherDB.loadProvinces();
-         Log.e("TAG","provinceList="+provinceList.toString());
          if(provinceList.size() > 0){
              dataList.clear();
              for(Province province :provinceList){
@@ -197,8 +195,8 @@ public class ChooseAreaActivity extends Activity {
                 } else if ("county".equals(type)) {
                     result = Utility.handleContiesResponse(coolWeatherDB, response, selectedCity.getId());
                 }
+                Log.e("TAG","result="+result);
                 if (result) {
-                    Log.e("TAG","result="+result);
                     //通过runOnUiThread()方法回到主线程处理逻辑
                     runOnUiThread(new Runnable() {
                         @Override

@@ -34,7 +34,7 @@ public class HttpUtil {
                     String l = "l";
                     Log.d("TAG",c);
                     if(c != l){
-                        connection.setRequestProperty("apikey","d1e19200ccd340362c47275a58a317e1");
+                        connection.setRequestProperty("apikey","64afe7f1077a53fd926bf86e718b59ed");
                         connection.connect();
                         InputStream in = connection.getInputStream();
                         BufferedReader reader = new BufferedReader(new InputStreamReader(in,"UTF-8"));

@@ -113,6 +113,7 @@ public class CoolWeatherDB {
                 list.add(city);
             }while (cursor.moveToNext());
         }
+        Log.e("TAG","city="+list.toString());
         return list;
     }
 
@@ -144,6 +145,7 @@ public class CoolWeatherDB {
                 county.setCityId(cityId);
             }while (cursor.moveToFirst());
         }
+        Log.e("TAG","county="+list.toString());
         return list;
     }
 
