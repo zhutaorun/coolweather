@@ -43,6 +43,7 @@ public class HttpUtil {
                         while ((line = reader.readLine()) != null){
                             response.append(line);
                             response.append("\r\n");
+
                         }
                         reader.close();
                         if(listener != null){
